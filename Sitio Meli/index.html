@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melisa Fontanessi | Branding & Digital Strategy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --color-blue: #1E2D42;
+            --color-ochre: #A67332;
+            --color-rose: #C68981;
+            --color-white: #FDFCFB;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-white);
+            color: var(--color-blue);
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+        /* Animaciones de entrada */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Botón Flotante de WhatsApp */
+        .btn-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+        .btn-whatsapp:hover { transform: scale(1.1); }
+
+        /* Estilos de botones */
+        .btn-main, .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 52px; 
+            padding: 0 32px;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+        .btn-main { background: var(--color-blue); color: white; border: 1px solid var(--color-blue); }
+        .btn-main:hover { background: var(--color-ochre); border-color: var(--color-ochre); }
+        .btn-outline { border: 1.5px solid var(--color-blue); color: var(--color-blue); }
+        .btn-outline:hover { background: var(--color-blue); color: white; }
+
+        /* Etiquetas */
+        .tag {
+            font-size: 10px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--color-ochre);
+        }
+
+        .nav-link { position: relative; transition: color 0.3s; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-ochre);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* Timeline de Experiencia */
+        .exp-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 1px solid rgba(166, 115, 50, 0.3);
+        }
+        .exp-item::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 0;
+            width: 9px;
+            height: 9px;
+            background-color: var(--color-ochre);
+            border-radius: 50%;
+        }
+
+        /* Modales */
+        .modal-active { overflow: hidden; }
+        .post-content img { width: 100%; height: auto; margin: 2rem 0; border-radius: 2px; }
+        
+        /* Glassmorphism para el nav */
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Estilo para el embed de Substack dentro del modal */
+        .substack-embed-container {
+            width: 100%;
+            min-height: 450px;
+            border: none;
+            margin-top: 2rem;
+        }
+
+        /* Placeholder para imágenes que fallan */
+        .img-fallback {
+            background: linear-gradient(45deg, #1e2d42, #2c3e50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.2);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/5493424481854" target="_blank" class="btn-whatsapp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Navegación -->
+    <nav class="fixed w-full z-[1000] nav-glass border-b border-gray-100 px-6 md:px-12 py-5 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <span class="text-2xl font-black tracking-tighter text-[#1E2D42]">MF</span>
+            <span class="text-lg font-light tracking-[0.1em] text-[#1E2D42] uppercase ml-1 hidden sm:inline">Melisa Fontanessi</span>
+        </div>
+        <div class="hidden md:flex space-x-8 text-[10px] uppercase tracking-[0.2em] font-bold text-gray-600">
+            <a href="#trayectoria" class="nav-link">Trayectoria</a>
+            <a href="#fomo" class="nav-link">FOMO</a>
+            <a href="#servicios" class="nav-link">Servicios</a>
+            <a href="#blog" class="nav-link">Blog</a>
+            <a href="#contacto" class="bg-[#1E2D42] text-white px-6 py-2.5 rounded-sm hover:bg-[#A67332] transition">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="min-h-screen flex items-center px-6 md:px-12 pt-24 bg-[#FDFCFB]">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <p class="tag mb-6">Estratega Digital + MBA</p>
+                <h1 class="text-5xl md:text-7xl leading-[1.05] mb-8 text-[#1E2D42]">
+                    Ideas que construyen <br><span class="italic font-normal text-[#C68981]">identidad real.</span>
+                </h1>
+                <p class="text-lg text-gray-600 font-light leading-relaxed mb-10 max-w-lg">
+                    Ayudo a empresas y líderes a encontrar su voz digital mediante una combinación de estructura de negocios y sensibilidad creativa.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5">
+                    <a href="#servicios" class="btn-main">Explorar Servicios</a>
+                    <a href="#contacto" class="btn-outline">Hablemos</a>
+                </div>
+            </div>
+            <div class="reveal relative">
+                <div class="aspect-[3/4] bg-gray-100 overflow-hidden rounded-sm shadow-2xl">
+                    <img src="DSC_4812.jpg" alt="Melisa Fontanessi" onerror="this.parentElement.classList.add('img-fallback'); this.style.display='none'; this.parentElement.innerHTML='[Tu Foto Aquí]'" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trayectoria -->
+    <section id="trayectoria" class="py-32 bg-[#1E2D42] text-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-24 reveal">
+                <h2 class="text-4xl md:text-5xl">Trayectoria <span class="italic text-[#E5B7B1]">& Liderazgo</span></h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-16">
+                <div class="space-y-12">
+                    <div class="exp-item reveal">
+                        <span class="text-[#A67332] font-bold text-xs tracking-widest">2023 - ACTUALIDAD</span>
+                        <h3 class="text-2xl mt-2 mb-3">Droguería 20 de Junio</h3>
+                        <p class="tag text-[#C68981] mb-4">Dirección de Marketing</p>
+                        <p class="text-white/70 font-light text-sm leading-relaxed">Responsable del desarrollo del área desde cero, gestión de marca y el éxito de la ExpoFarma20.</p>
+                    </div>
+                    <div class="exp-item reveal delay-100">
+                        <span class="text-[#A67332] font-bold text-xs tracking-widest">2021 - ACTUALIDAD</span>
+                        <h3 class="text-2xl mt-2 mb-3">Siemprebien.com.ar</h3>
+                        <p class="tag text-[#C68981] mb-4">E-commerce Strategy</p>
+                        <p class="text-white/70 font-light text-sm leading-relaxed">Impulsé el crecimiento digital a través de la profesionalización del email marketing y CRM.</p>
+                    </div>
+                </div>
+                <div class="space-y-12">
+                    <div class="exp-item reveal delay-200">
+                        <span class="text-[#A67332] font-bold text-xs tracking-widest">2008 - 2021</span>
+                        <h3 class="text-2xl mt-2 mb-3">Randstad Argentina & Uruguay</h3>
+                        <p class="tag text-[#C68981] mb-4">Digital Marketing Manager</p>
+                        <p class="text-white/70 font-light text-sm leading-relaxed">Más de una década liderando estrategias digitales en una multinacional líder de servicios de RRHH.</p>
+                    </div>
+                    <div class="exp-item reveal delay-300">
+                        <span class="text-[#A67332] font-bold text-xs tracking-widest">FUNDADORA</span>
+                        <h3 class="text-2xl mt-2 mb-3">Estudio Meli Meli</h3>
+                        <p class="tag text-[#C68981] mb-4">Branding & Fotografía</p>
+                        <p class="text-white/70 font-light text-sm leading-relaxed">Mi faceta emprendedora donde la estética y el propósito se encuentran para potenciar marcas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOMO -->
+    <section id="fomo" class="py-32 bg-[#F9F7F5]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="tag mb-4">Media & Community</p>
+                    <h2 class="text-5xl md:text-6xl mb-8 font-bold">FOMO <span class="italic font-normal text-[#A67332]">Streaming</span></h2>
+                    <p class="text-gray-600 font-light leading-relaxed mb-8 text-lg">Co-creadora de un espacio disruptivo en Rosario para hablar de lo que realmente importa en el mundo de los negocios y la tecnología.</p>
+                    <a href="https://www.youtube.com/@FOMOStreaming/videos" target="_blank" class="btn-main">Ver episodios</a>
+                </div>
+                <div class="reveal delay-200">
+                    <div class="shadow-2xl rounded-sm overflow-hidden bg-white aspect-video relative">
+                        <!-- Usamos una imagen de stock de alta calidad de respaldo -->
+                        <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?q=80&w=1000" alt="FOMO Streaming" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-[#1E2D42]/10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section id="servicios" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-24 reveal">
+                <p class="tag mb-4">¿Cómo podemos trabajar?</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Servicios</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 items-stretch">
+                <!-- Estratégico (Branding 360) -->
+                <div class="p-10 border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-all duration-500 reveal flex flex-col">
+                    <p class="tag mb-4 text-xs opacity-60">Branding 360°</p>
+                    <h3 class="text-4xl mb-6 italic font-bold">Estratégico</h3>
+                    <p class="text-sm text-gray-500 mb-8 font-light flex-grow">Ideal para empresas que necesitan un cambio de imagen total y coherencia visual en todos sus canales.</p>
+                    <div class="mb-8">
+                        <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-6">Servicios Clave</p>
+                        <ul class="space-y-4 text-xs text-gray-700 font-medium">
+                            <li><i class="fas fa-check text-[#A67332] mr-3"></i> Diagnóstico de Marca</li>
+                            <li><i class="fas fa-check text-[#A67332] mr-3"></i> Manual de Identidad</li>
+                            <li><i class="fas fa-check text-[#A67332] mr-3"></i> Estrategia de Contenidos</li>
+                            <li><i class="fas fa-check text-[#A67332] mr-3"></i> Social Media Plan</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/5493424481854" target="_blank" class="btn-outline w-full mt-auto">Consultar</a>
+                </div>
+
+                <!-- Leadership (CMO as a Service) -->
+                <div class="p-10 bg-[#1E2D42] text-white transform md:scale-105 z-10 shadow-2xl reveal delay-100 flex flex-col relative overflow-hidden">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2">
+                        <span class="bg-[#1E2D42] border-x border-b border-[#A67332] text-white px-4 py-1.5 text-[8px] uppercase tracking-[0.3em] font-bold">Más Solicitado</span>
+                    </div>
+                    <p class="tag mb-4 text-xs text-[#C68981] mt-4">CMO as a Service</p>
+                    <h3 class="text-4xl mb-6 italic font-bold">Leadership</h3>
+                    <p class="text-sm text-white/60 mb-8 font-light flex-grow">Dirección de marketing externa. Analizo tu negocio, defino la estrategia desde cero y armo los procesos.</p>
+                    <div class="mb-10">
+                        <p class="text-[10px] font-black uppercase tracking-widest text-white/30 mb-6">Servicios Clave</p>
+                        <ul class="space-y-4 text-xs text-white/90 font-medium">
+                            <li><i class="fas fa-star text-[#A67332] mr-3"></i> Auditoría de Negocio</li>
+                            <li><i class="fas fa-star text-[#A67332] mr-3"></i> Plan Anual de Marketing</li>
+                            <li><i class="fas fa-star text-[#A67332] mr-3"></i> Selección de Partners</li>
+                            <li><i class="fas fa-star text-[#A67332] mr-3"></i> Control de KPIs y ROI</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/5493424481854" target="_blank" class="btn-main w-full bg-[#A67332] border-[#A67332] mt-auto">Me interesa</a>
+                </div>
+
+                <!-- Streaming Content -->
+                <div class="p-10 border border-gray-100 bg-white shadow-sm hover:shadow-xl transition-all duration-500 reveal delay-200 flex flex-col">
+                    <p class="tag mb-4 text-xs opacity-60">Producción</p>
+                    <h3 class="text-4xl mb-6 italic font-bold leading-tight">Streaming Content</h3>
+                    <p class="text-sm text-gray-500 mb-8 font-light flex-grow">Dirección creativa y técnica para programas de streaming, podcasts o reels de alto impacto. Estilo FOMO.</p>
+                    <div class="mb-8">
+                        <p class="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-6">Servicios Clave</p>
+                        <ul class="space-y-4 text-xs text-gray-700 font-medium">
+                            <li><i class="fas fa-check text-[#A67332] mr-3"></i> Concepto & Branding</li>
+                            <li><i class="fas fa-check text-[#A67332] mr-3"></i> Guionado Estratégico</li>
+                            <li><i class="fas fa-check text-[#A67332] mr-3"></i> Montaje de Escena</li>
+                            <li><i class="fas fa-check text-[#A67332] mr-3"></i> Distribución Multiplataforma</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/5493424481854" target="_blank" class="btn-outline w-full mt-auto">Saber más</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-32 bg-[#FDFCFB]">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-24 reveal">
+                <p class="tag mb-4">Compartiendo Ideas</p>
+                <h2 class="text-4xl md:text-5xl">El <span class="italic">Blog</span></h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+                <!-- Post de Substack -->
+                <article class="reveal cursor-pointer group" onclick="openPost('packaging-unboxing')">
+                    <div class="aspect-video bg-[#1E2D42] mb-6 overflow-hidden rounded-sm flex items-center justify-center relative">
+                        <img src="https://images.unsplash.com/photo-1589939705384-5185138a0470?q=80&w=1000" class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:scale-105 transition duration-700">
+                        <span class="relative text-white text-[10px] font-bold tracking-[0.4em] uppercase border border-white/20 px-4 py-2">Substack</span>
+                    </div>
+                    <p class="tag text-[10px] mb-3 text-[#C68981]">Packaging & Experiencia</p>
+                    <h3 class="text-xl mb-4 leading-tight group-hover:text-[#A67332] transition italic font-bold">Tu packaging puede hacer que te vuelvan a comprar (o no).</h3>
+                    <p class="text-gray-500 font-light text-sm line-clamp-3">El packaging y el unboxing. Una experiencia alejada de tanta IA...</p>
+                    <p class="mt-4 text-[10px] font-bold uppercase text-[#A67332]">Leer en Substack →</p>
+                </article>
+
+                <!-- Otros posts... -->
+                <article class="reveal delay-100 cursor-pointer group" onclick="openPost('email-marketing')">
+                    <div class="aspect-video bg-gray-100 mb-6 overflow-hidden rounded-sm">
+                        <img src="https://images.unsplash.com/photo-1557200134-90327ee9fafa?q=80&w=1000" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <p class="tag text-[10px] mb-3">E-commerce</p>
+                    <h3 class="text-xl mb-4 leading-tight group-hover:text-[#A67332] transition italic font-bold">Email Marketing: El motor silencioso</h3>
+                    <p class="text-gray-500 font-light text-sm line-clamp-3">Aprendizajes sobre cómo revivir una base de datos.</p>
+                </article>
+
+                <article class="reveal delay-200 cursor-pointer group" onclick="openPost('branding-minimalista')">
+                    <div class="aspect-video bg-gray-100 mb-6 overflow-hidden rounded-sm">
+                        <img src="https://images.unsplash.com/photo-1509343256512-d77a5cb3791b?q=80&w=1000" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <p class="tag text-[10px] mb-3">Diseño</p>
+                    <h3 class="text-xl mb-4 leading-tight group-hover:text-[#A67332] transition italic font-bold">El valor del diseño funcional</h3>
+                    <p class="text-gray-500 font-light text-sm line-clamp-3">Por qué menos es más cuando buscamos generar confianza.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Blog -->
+    <div id="post-modal" class="fixed inset-0 z-[2000] hidden bg-white overflow-y-auto">
+        <div class="max-w-3xl mx-auto px-6 py-24 relative">
+            <button onclick="closePost()" class="fixed top-8 right-8 text-[#1E2D42] font-bold uppercase text-[10px] tracking-[0.2em] bg-white/90 p-4 hover:text-[#A67332] border border-gray-100 shadow-sm">Cerrar (x)</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Contacto -->
+    <footer id="contacto" class="py-32 bg-[#1E2D42] text-white px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl md:text-6xl mb-12 italic">¿Construimos juntos <span class="text-[#E5B7B1]">tu próxima idea</span>?</h2>
+            <div class="flex flex-col md:flex-row justify-center gap-10 mb-20 text-lg">
+                <a href="mailto:melifontanessi@gmail.com" class="hover:text-[#A67332] transition border-b border-white/10 pb-1">melifontanessi@gmail.com</a>
+                <a href="https://wa.me/5493424481854" target="_blank" class="hover:text-[#A67332] transition border-b border-white/10 pb-1">+54 9 342 4481854</a>
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.6em] text-white/20">Melisa Fontanessi &copy; 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        const postData = {
+            'packaging-unboxing': {
+                tag: 'Packaging & Experiencia',
+                title: 'Tu packaging puede hacer que te vuelvan a comprar (o no).',
+                subtitle: 'El unboxing como experiencia humana frente a la frialdad de la IA.',
+                isSubstack: true,
+                substackEmbed: `
+                    <div class="substack-post-embed">
+                        <p lang="es">Tu packaging puede hacer que te vuelvan a comprar (o no).  por Eme</p>
+                        <p>El packaging y el unboxing. Una experiencia alejada de tanta IA...</p>
+                        <a data-post-link href="https://yaloveremos.substack.com/p/tu-packaging-puede-hacer-que-te-vuelvan">Leer en Substack</a>
+                    </div>
+                `
+            },
+            'email-marketing': {
+                tag: 'E-commerce',
+                title: 'Email Marketing: El motor silencioso',
+                subtitle: 'De bandeja de entrada vacía a estrategia de éxito recurrente.',
+                image: 'https://images.unsplash.com/photo-1557200134-90327ee9fafa?q=80&w=1000',
+                content: `<p>Contenido sobre email marketing...</p>`
+            },
+            'branding-minimalista': {
+                tag: 'Diseño',
+                title: 'El valor del diseño funcional',
+                subtitle: 'Identidad que comunica claridad y confianza.',
+                image: 'https://images.unsplash.com/photo-1509343256512-d77a5cb3791b?q=80&w=1000',
+                content: `<p>Contenido sobre diseño funcional...</p>`
+            }
+        };
+
+        function openPost(id) {
+            const post = postData[id];
+            if(!post) return;
+            const modalBody = document.getElementById('modal-body');
+            
+            if(post.isSubstack) {
+                modalBody.innerHTML = `
+                    <p class="tag mb-6 text-center">${post.tag}</p>
+                    <h1 class="text-4xl md:text-5xl text-[#1E2D42] text-center mb-8 font-bold leading-tight">${post.title}</h1>
+                    <div class="substack-embed-container">${post.substackEmbed}</div>
+                `;
+                if (window.Substack) window.Substack.init();
+            } else {
+                modalBody.innerHTML = `
+                    <p class="tag mb-6 text-center">${post.tag}</p>
+                    <h1 class="text-4xl md:text-5xl text-[#1E2D42] text-center mb-8 font-bold leading-tight">${post.title}</h1>
+                    <img src="${post.image}" class="w-full mb-16 shadow-xl rounded-sm">
+                    <div class="post-content prose prose-lg mx-auto text-gray-700 leading-relaxed">${post.content}</div>
+                `;
+            }
+            document.getElementById('post-modal').classList.remove('hidden');
+            document.body.classList.add('modal-active');
+        }
+
+        function closePost() {
+            document.getElementById('post-modal').classList.add('hidden');
+            document.body.classList.remove('modal-active');
+        }
+
+        const reveal = () => {
+            document.querySelectorAll('.reveal').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', reveal);
+        window.onload = reveal;
+    </script>
+    <script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
+</body>
+</html>
