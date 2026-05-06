@@ -181,8 +181,9 @@
                     <a href="https://www.youtube.com/@FOMOStreaming" target="_blank" class="btn-main">Ver Episodios</a>
                 </div>
                 <div class="reveal">
-                    <div class="shadow-2xl rounded-sm overflow-hidden aspect-[4/3] bg-white">
-                        <img src="fomo-streaming-meli.jpg" alt="FOMO Streaming con Melisa Fontanessi" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder\'>[ Imagen FOMO: fomo-streaming-meli.jpg ]</div>'" class="w-full h-full object-cover">
+                    <!-- Ajustado para que la imagen se vea correctamente independientemente del tamaño del archivo -->
+                    <div class="shadow-2xl rounded-sm overflow-hidden bg-white border border-gray-100">
+                        <img src="fomo-streaming-meli.jpg" alt="FOMO Streaming con Melisa Fontanessi" onerror="this.src='fomo-streaming-meli.png'; this.onerror=function(){this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder\'>[ Imagen FOMO: fomo-streaming-meli.jpg ]</div>'};" class="w-full h-auto object-cover block">
                     </div>
                 </div>
             </div>
