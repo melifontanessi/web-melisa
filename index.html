@@ -101,23 +101,12 @@
             display: block;
         }
 
-        /* Estilos de Blog */
         .blog-card {
             background: white;
             transition: all 0.3s ease;
         }
         .blog-card:hover {
             transform: translateY(-5px);
-        }
-
-        #postModal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(30, 45, 66, 0.98);
-            z-index: 2000;
-            overflow-y: auto;
-            padding: 40px 20px;
         }
 
         .img-placeholder {
@@ -192,8 +181,8 @@
                     <a href="https://www.youtube.com/@FOMOStreaming" target="_blank" class="btn-main">Ver Episodios</a>
                 </div>
                 <div class="reveal">
-                    <div class="shadow-2xl rounded-sm overflow-hidden aspect-video bg-white">
-                        <img src="fomo-streaming-meli.png" alt="FOMO Streaming" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder\'>[ Imagen FOMO: fomo-streaming-meli.png ]</div>'" class="w-full h-full object-cover">
+                    <div class="shadow-2xl rounded-sm overflow-hidden aspect-[4/3] bg-white">
+                        <img src="fomo-streaming-meli.jpg" alt="FOMO Streaming con Melisa Fontanessi" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'img-placeholder\'>[ Imagen FOMO: fomo-streaming-meli.jpg ]</div>'" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -272,7 +261,7 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Nota Nueva: Substack Packaging -->
+                <!-- Nota Substack Packaging -->
                 <article class="blog-card reveal cursor-pointer group" onclick="window.open('https://melifontanessi.substack.com/p/tu-packaging-puede-hacer-que-te-vuelvan', '_blank')">
                     <div class="aspect-[16/10] bg-gray-200 mb-6 overflow-hidden rounded-sm shadow-sm relative">
                         <img src="tu-packaging-hace-que-vendas-mas.png" alt="Tu packaging hace que vendas más" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
@@ -284,15 +273,16 @@
                     <span class="text-[10px] font-bold border-b border-[#A67332] pb-1 uppercase tracking-widest text-[#A67332]">Leer en Substack</span>
                 </article>
 
-                <!-- Nota FOMO (Placeholder / Modal) -->
-                <article class="blog-card reveal delay-100 cursor-pointer group" onclick="openPost('branding-futuro')">
+                <!-- Nota Substack IA -->
+                <article class="blog-card reveal delay-100 cursor-pointer group" onclick="window.open('https://melifontanessi.substack.com/p/el-futuro-del-branding-en-la-era', '_blank')">
                     <div class="aspect-[16/10] bg-gray-200 mb-6 overflow-hidden rounded-sm shadow-sm relative">
-                        <img src="fomo-streaming-meli.png" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100">
+                        <img src="El-branding-en-la-era-de-la-IA.png" alt="El futuro del branding en la era de la IA" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-2 py-1 text-[8px] font-bold tracking-widest uppercase">Substack</div>
                     </div>
                     <p class="tag-gold !text-[9px] mb-3">Tendencias</p>
                     <h3 class="text-xl text-[#1E2D42] mb-4 leading-snug group-hover:text-[#A67332] transition font-bold">El futuro del Branding en la era de la IA</h3>
-                    <p class="text-gray-500 font-light text-xs leading-relaxed mb-6">Por qué la identidad humana será el activo más valioso de las empresas en los próximos años.</p>
-                    <span class="text-[10px] font-bold border-b border-[#A67332] pb-1 uppercase tracking-widest text-[#A67332]">Ver Nota</span>
+                    <p class="text-gray-500 font-light text-xs leading-relaxed mb-6">¿Qué pasa cuando la tecnología puede crear de todo? Analizamos por qué lo humano será el activo más valioso.</p>
+                    <span class="text-[10px] font-bold border-b border-[#A67332] pb-1 uppercase tracking-widest text-[#A67332]">Leer en Substack</span>
                 </article>
             </div>
         </div>
@@ -315,45 +305,8 @@
         </div>
     </footer>
 
-    <!-- Modal de Blog (para notas internas) -->
-    <div id="postModal">
-        <div class="max-w-3xl mx-auto bg-white p-8 md:p-16 rounded-sm relative">
-            <button onclick="closePost()" class="absolute top-6 right-6 text-2xl text-[#1E2D42]">&times;</button>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
     <script>
-        const postData = {
-            'branding-futuro': {
-                tag: 'Tendencias',
-                title: 'El futuro del Branding en la era de la IA',
-                image: 'fomo-streaming-meli.png',
-                content: `
-                    <p class="mb-6 text-lg leading-relaxed text-gray-600">Vivimos en una era donde la creación de contenido se ha automatizado. La IA puede generar logos, textos y videos en segundos. Pero hay algo que no puede replicar: <strong>la intención humana.</strong></p>
-                    <p class="mb-6 text-gray-600">En el futuro, las marcas no competirán por quién tiene el mejor diseño, sino por quién tiene la conexión más genuina.</p>
-                `
-            }
-        };
-
-        function openPost(postId) {
-            const post = postData[postId];
-            const content = `
-                <span class="tag-gold">${post.tag}</span>
-                <h2 class="text-4xl font-bold mb-8 text-[#1E2D42]">${post.title}</h2>
-                <img src="${post.image}" class="w-full aspect-video object-cover mb-10 rounded-sm">
-                <div class="text-gray-700 leading-relaxed">${post.content}</div>
-            `;
-            document.getElementById('modalContent').innerHTML = content;
-            document.getElementById('postModal').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePost() {
-            document.getElementById('postModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
+        // Animaciones de scroll
         const reveal = () => {
             const reveals = document.querySelectorAll('.reveal');
             reveals.forEach(el => {
